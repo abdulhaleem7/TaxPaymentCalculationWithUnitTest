@@ -10,139 +10,107 @@ namespace TaxCalculatorTest.NUnitTest
 {
     public class TaxCalculatorTest
     {
-        [Test]
-        public void Calculate_Taxable_Income()
+        private ITaxCalculator _taxCalculator;
+        [SetUp]
+        public void Setup()
         {
-            //Arrange
-            var taxableIncome = new TaxCalculatorService();
-
+            _taxCalculator = new TaxCalculatorService();
+        }
+        [Test]
+        public void CalculateTaxableIncome_Income543000m_ShouldReturnTaxableIncome()
+        {
             //act
-            var result = taxableIncome.CalculateTaxableIncome(543000m);
+            var result = _taxCalculator.CalculateTaxableIncome(543000m);
 
             //assert
             Assert.That(result, Is.EqualTo(4595776.000m));
         }
         [Test]
-        public void Calculate_Taxable_Income_For_6890000()
+        public void CalculateTaxableIncome_Income6890000_ShouldReturnTaxableIncome()
         {
-            //Arrange
-            var taxableIncome = new TaxCalculatorService();
 
             //act
-            var result = taxableIncome.CalculateTaxableIncome(6890000);
+            var result = _taxCalculator.CalculateTaxableIncome(6890000);
 
             //assert
             Assert.That(result, Is.EqualTo(60025680.000m));
         }
         [Test]
-        public void Calculate_Taxable_Income_For_400000()
+        public void CalculateTaxableIncome_Income400000_ShouldReturnTaxableIncome()
         {
-            //Arrange
-            var taxableIncome = new TaxCalculatorService();
 
             //act
-            var result = taxableIncome.CalculateTaxableIncome(400000);
+            var result = _taxCalculator.CalculateTaxableIncome(400000);
 
             //assert
             Assert.That(result, Is.EqualTo(3332800.000m));
         }
-         [Test]
-         public void Calculate_Taxable_Income_For_LessThanZero()
+        [Test]
+        public void CalculateTaxableIncome_IncomeLessThanZero_ShouldReturnAnException()
          {
-             //Arrange
-             var taxableIncome = new TaxCalculatorService();
 
              //assert
-             Assert.Throws<ArgumentException>(()=> taxableIncome.CalculateTaxableIncome(30000));
+             Assert.Throws<ArgumentException>(()=> _taxCalculator.CalculateTaxableIncome(30000));
          }
         [Test]
-        public void Calculate_Monthly_Tax_Payment()
+        public void CalculateMonthlyTaxPayment_Income900000_ShouldReturnMonthlyTaxPayment()
         {
-            //Arrange
-            var taxableIncome = new TaxCalculatorService();
-
             //act
-            var result = taxableIncome.CalculateTaxPaymentPerMonth(900000);
+            var result = _taxCalculator.CalculateTaxPaymentPerMonth(900000);
 
             //assert
             Assert.That(result, Is.EqualTo(126270.66666666666666666666667m));
         }
         [Test]
-        public void Calculate_Monthly_Tax_Payment_For_6890000()
+        public void CalculateMonthlyTaxPaymen_Income6890000_ShouldReturnMonthlyTaxPayment()
         {
-            //Arrange
-            var taxableIncome = new TaxCalculatorService();
-
             //act
-            var result = taxableIncome.CalculateTaxPaymentPerMonth(6890000);
+            var result = _taxCalculator.CalculateTaxPaymentPerMonth(6890000);
 
             //assert
             Assert.That(result, Is.EqualTo(1041116.0666666666666666666667m));
         }
         [Test]
-        public void Calculate_Monthly_Tax_Payment_For_400000()
+        public void Calculate_MonthlyTaxPayment_Income400000_ShouldReturnMonthlyTaxPayment()
         {
-            //Arrange
-            var taxableIncome = new TaxCalculatorService();
-
             //act
-            var result = taxableIncome.CalculateTaxPaymentPerMonth(400000);
+            var result = _taxCalculator.CalculateTaxPaymentPerMonth(400000);
 
             //assert
             Assert.That(result, Is.EqualTo(48990.666666666666666666666667m));
         }
         [Test]
-        public void Calculate_Monthly_Tax_Payment_For_1700000()
+        public void CalculateMonthlyTaxPayment_Income1700000_ShouldReturnMonthlyTaxPayment()
         {
-            //Arrange
-            var taxableIncome = new TaxCalculatorService();
-
             //act
-            var result = taxableIncome.CalculateTaxPaymentPerMonth(1700000);
+            var result = _taxCalculator.CalculateTaxPaymentPerMonth(1700000);
 
             //assert
             Assert.That(result, Is.EqualTo(249848.66666666666666666666667m));
         }
         [Test]
-        public void Calculate_Taxable_Income_For_LessThanZero2()
+        public void CalculateMonthlyTaxPayment_Income6890000_ShouldReturnNotEqualToMonthlyTaxPayment()
         {
-            //Arrange
-            var taxableIncome = new TaxCalculatorService();
-
-            //assert
-            Assert.Throws<ArgumentException>(() => taxableIncome.CalculateTaxPaymentPerMonth(30000));
-        }
-        public void Calculate_Monthly_Tax_Payment_For_6890000_Not_Equal_To_Answer()
-        {
-            //Arrange
-            var taxableIncome = new TaxCalculatorService();
-
             //act
-            var result = taxableIncome.CalculateTaxPaymentPerMonth(6890000);
+            var result = _taxCalculator.CalculateTaxPaymentPerMonth(6890000);
 
             //assert
             Assert.That(result, Is.Not.EqualTo(141116.0666666666666666666667m));
         }
         [Test]
-        public void Calculate_Monthly_Tax_Payment_For_400000_Not_Equal_To_Answer()
+        public void CalculateMonthlyTaxPayment_Income400000_ShouldReturnNotEqualToMonthlyTaxPayment()
         {
-            //Arrange
-            var taxableIncome = new TaxCalculatorService();
-
             //act
-            var result = taxableIncome.CalculateTaxPaymentPerMonth(400000);
+            var result = _taxCalculator.CalculateTaxPaymentPerMonth(400000);
 
             //assert
             Assert.That(result, Is.Not.EqualTo(4990.666666666666666666666667m));
         }
         [Test]
-        public void Calculate_Monthly_Tax_Payment_For_1700000_Not_Equal_To_Answer()
+        public void CalculateMonthlyTaxPayment_Income1700000_ShouldReturnNotEqualToMonthlyTaxPayment()
         {
-            //Arrange
-            var taxableIncome = new TaxCalculatorService();
-
             //act
-            var result = taxableIncome.CalculateTaxPaymentPerMonth(1700000);
+            var result = _taxCalculator.CalculateTaxPaymentPerMonth(1700000);
 
             //assert
             Assert.That(result, Is.Not.EqualTo(249848.666666666666667m));

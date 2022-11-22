@@ -10,149 +10,70 @@ namespace TaxCalculatorTest.NUnitTest
 {
     public class TaxCalculatorTestForEachPercentage
     {
-        [Test]
-        public void CalCulateFirst300ThousandFor7Percent()
+        private ITaxCalculator _taxCalculator;
+        [SetUp]
+        public void Setup()
         {
-            //Arrange
-            var taxableIncome = new TaxCalculatorService();
+            _taxCalculator = new TaxCalculatorService();
+        }
+
+        [Test]
+        public void CalCulateFirst300ThousandFor7Percent_IncomeIs300000_Return7PercentOfIncome()
+        {
 
             //act
-            var result = taxableIncome.CalCulateFirst300Thousand(300000);
+            var result = _taxCalculator.CalCulateFirst300Thousand(300000);
 
             //assert
             Assert.That(result, Is.EqualTo(21000.00m));
         }
+ 
         [Test]
-        public void CalCulateFirst300ThousandFor7Percent_Not_Equal_To_Answer()
+        public void CalCulateSecond300ThousandFor11Percent_IncomeIs600000_Return11PercentOfIncome()
         {
-            //Arrange
-            var taxableIncome = new TaxCalculatorService();
-
             //act
-            var result = taxableIncome.CalCulateFirst300Thousand(300000);
-
-            //assert
-            Assert.That(result, Is.Not.EqualTo(22000.00m));
-        }
-        [Test]
-        public void CalCulateSecond300ThousandFor11Percent()
-        {
-            //Arrange
-            var taxableIncome = new TaxCalculatorService();
-
-            //act
-            var result = taxableIncome.CalculateSecond300Thousand(600000);
+            var result = _taxCalculator.CalculateSecond300Thousand(600000);
 
             //assert
             Assert.That(result, Is.EqualTo(66000.00m));
         }
+       
         [Test]
-        public void CalCulateSecond300ThousandFor7Percent_Not_Equal_To_Answer()
+        public void CalCulateFirst500ThousandFor15Percent_IncomeIs1100000_Return15PercentOfIncome()
         {
-            //Arrange
-            var taxableIncome = new TaxCalculatorService();
-
             //act
-            var result = taxableIncome.CalculateSecond300Thousand(600000);
-
-            //assert
-            Assert.That(result, Is.Not.EqualTo(2000.00m));
-        }
-        [Test]
-        public void CalCulateFirst500ThousandFor15Percent()
-        {
-            //Arrange
-            var taxableIncome = new TaxCalculatorService();
-
-            //act
-            var result = taxableIncome.CalculateThird500Thousand(1100000);
+            var result = _taxCalculator.CalculateThird500Thousand(1100000);
 
             //assert
             Assert.That(result, Is.EqualTo(165000.00m));
         }
         [Test]
-        public void CalCulateFirst500ThousandFor15Percent_Not_Equal_To_Answer()
+        public void CalCulateSecond500ThousandFor19Percent_IncomeIs1600000_Return19PercentOfIncome()
         {
-            //Arrange
-            var taxableIncome = new TaxCalculatorService();
-
             //act
-            var result = taxableIncome.CalculateThird500Thousand(1100000);
-
-            //assert
-            Assert.That(result, Is.Not.EqualTo(22000.00m));
-        }
-        [Test]
-        public void CalCulateSecond500ThousandFor19Percent()
-        {
-            //Arrange
-            var taxableIncome = new TaxCalculatorService();
-
-            //act
-            var result = taxableIncome.CalculateFourth500Thousand(1600000);
+            var result = _taxCalculator.CalculateFourth500Thousand(1600000);
 
             //assert
             Assert.That(result, Is.EqualTo(304000.00m));
         }
         [Test]
-        public void CalCulateSecond500ThousandFor19Percent_Not_Equal_To_Answer()
+        public void CalCulateNextOnePointSixMillionThousandFor21Percent_IncomeIs2100000_Return21PercentOfIncome()
         {
-            //Arrange
-            var taxableIncome = new TaxCalculatorService();
-
             //act
-            var result = taxableIncome.CalculateFourth500Thousand(1600000);
-
-            //assert
-            Assert.That(result, Is.Not.EqualTo(223000.00m));
-        }
-        [Test]
-        public void CalCulateNextOnePointSixMillionThousandFor21Percent()
-        {
-            //Arrange
-            var taxableIncome = new TaxCalculatorService();
-
-            //act
-            var result = taxableIncome.CalculateOnePointSixMillion(2100000);
+            var result = _taxCalculator.CalculateOnePointSixMillion(2100000);
 
             //assert
             Assert.That(result, Is.EqualTo(441000.00m));
         }
         [Test]
-        public void CalCulateNextOnePointSixMillionThousandFor21Percent_Not_Equal_To_Answer()
+        public void CalCulateNextThreePointTwoMillionThousandFor24Percent_IncomeIs3200000_Return24PercentOfIncome()
         {
-            //Arrange
-            var taxableIncome = new TaxCalculatorService();
-
             //act
-            var result = taxableIncome.CalculateFourth500Thousand(2100000);
-
-            //assert
-            Assert.That(result, Is.Not.EqualTo(223000.00m));
-        }
-        [Test]
-        public void CalCulateNextThreePointTwoMillionThousandFor24Percent()
-        {
-            //Arrange
-            var taxableIncome = new TaxCalculatorService();
-
-            //act
-            var result = taxableIncome.CalculateThreePointTwoMillion(3200000);
+            var result = _taxCalculator.CalculateThreePointTwoMillion(3200000);
 
             //assert
             Assert.That(result, Is.EqualTo(672000.00m));
         }
-        [Test]
-        public void CalCulateNextThreePointTwoMillionThousandFor24Percent_Not_Equal_To_Answer()
-        {
-            //Arrange
-            var taxableIncome = new TaxCalculatorService();
-
-            //act
-            var result = taxableIncome.CalculateThreePointTwoMillion(3200000);
-
-            //assert
-            Assert.That(result, Is.Not.EqualTo(223000.00m));
-        }
+        
     }
 }

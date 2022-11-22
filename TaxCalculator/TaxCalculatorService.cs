@@ -6,17 +6,22 @@ using System.Threading.Tasks;
 
 namespace TaxCalculator
 {
-    public class TaxCalculatorService
+    public class TaxCalculatorService : ITaxCalculator
     {
 
+        public decimal CalCulatePension(decimal amount)
+        {
+            decimal pension = (8 / 100m) * amount;
+            return pension;
+        }
         public decimal CalculateTaxableIncome(decimal salary)
         {
-            if(salary <= 30000)
+            if (salary <= 30000)
             {
                 throw new ArgumentException("Amount is less than calculation");
             }
             salary *= 12;
-            decimal pension = (8/100m) * salary;
+            var pension = CalCulatePension(salary);
             decimal grossIncome = salary - pension;
             decimal TwentyPercentOfGross = (20/100m) * grossIncome;
             decimal ConsolidatedReleifAllowance = 0;
@@ -30,6 +35,7 @@ namespace TaxCalculator
             }
             decimal total = pension + TwentyPercentOfGross + ConsolidatedReleifAllowance;
             decimal taxableIncome = salary - total;
+
             return taxableIncome;
         }
 
